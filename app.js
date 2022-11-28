@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const ServerApiVersion = require("mongoose");
 const PORT = process.env.PORT || 3000;
 
 const cors = require("cors");
@@ -8,7 +9,11 @@ require("dotenv").config();
 console.log(process.env.MONGODB_URI);
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost:27017/socialDB",
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1,
+  }
 );
 app.use(cors());
 const User = require("./models/user");
