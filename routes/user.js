@@ -21,12 +21,15 @@ router.post("/register", async (req, res) => {
   try {
     const { email, username, fullname, password, description, profilePicture } =
       req.body;
+    console.log("before ---------------------------------");
     const isUsernameEx = await User.find({ username: username });
     const isEmailEx = await User.find({ email: email });
+    console.log("after ---------------------------------");
     if (isUsernameEx) {
       res.status(400).json({ message: "This username already exists" });
     }
     if (isEmailEx) {
+      console.log("hi");
       res.status(400).json({ message: "This email already exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 12);
