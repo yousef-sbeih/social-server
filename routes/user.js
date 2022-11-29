@@ -21,8 +21,8 @@ router.post("/register", async (req, res) => {
   try {
     const { email, username, fullname, password, description, profilePicture } =
       req.body;
-    const isUsernameEx = User.find({ username: username });
-    const isEmailEx = User.find({ email: username });
+    const isUsernameEx = await User.find({ username: username });
+    const isEmailEx = await User.find({ email: username });
     if (isUsernameEx) {
       res.status(400).json({ message: "This username already exists" });
     }
